@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../Styles/Transaction.css'; // Reusing transaction styles
+import '../Styles/Expenses.css'; // Import specific expenses styles
 import { Pie } from 'react-chartjs-2'; // Changed from Bar to Pie
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js'; // Changed imports for pie chart
 // Import user authentication from Clerk

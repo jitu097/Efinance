@@ -8,7 +8,7 @@ import { Chart, BarElement, ArcElement, CategoryScale, LinearScale, Tooltip, Leg
 // Dashboard data fetching services
 import { fetchDashboardTransactions, fetchDashboardExpenses, fetchDashboardInvestments } from '../../services/dashboardService';
 import Navbar from './Navbar';
-import './dashboard.css';
+import './Dashboard.css';
 
 // Register Chart.js components globally
 Chart.register(BarElement, ArcElement, CategoryScale, LinearScale, Tooltip, Legend, LineElement, PointElement);
