@@ -1,8 +1,8 @@
 // E-Finance API Service - Connects to Backend Server
 // Handles all API calls to the backend for transactions, expenses, and investments
 
-// Backend API base URL - using Vite environment variable or default to localhost
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+// Backend API base URL - using Vite environment variable or default to production URL
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://efinance-3mb3.onrender.com/api';
 
 // Helper function to make API requests with error handling
 const apiRequest = async (url, options = {}) => {
