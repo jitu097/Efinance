@@ -1,0 +1,246 @@
+/* 
+ * ChatBot Container
+ * Positions the chatbot in the bottom-right corner of the viewport
+ * with high z-index to ensure it stays on top of other elements
+ */
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* 
+ * Toggle Button
+ * The circular button that displays when chat is collapsed
+ * Includes continuous rotation animation
+ */
+.chatbot-toggle-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #007bff;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  animation: rotate 4s linear infinite; /* Continuous rotation animation */
+}
+
+/* Pause rotation and scale up slightly on hover */
+.chatbot-toggle-button:hover {
+  animation-play-state: paused;
+  transform: scale(1.05);
+}
+
+/* 
+ * Rotation Animation
+ * Defines 360-degree rotation for the toggle button
+ */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Icon inside the toggle button */
+.chatbot-button-icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* 
+ * Chat Widget
+ * The expanded chat interface container
+ */
+.chatbot-widget {
+  width: 350px;
+  max-height: 450px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 
+ * Chat Header
+ * Top section with title, avatar and close button
+ */
+.chatbot-header {
+  background-color: #007bff;
+  color: white;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Close button in the chat header */
+.chatbot-close-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Bot avatar image in the header */
+.chatbot-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background-color: white;
+}
+
+/* Container for title and subtitle text */
+.chatbot-title-container {
+  flex: 1;
+}
+
+/* Main title text */
+.chatbot-title {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Subtitle text */
+.chatbot-subtitle {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* 
+ * Messages Container
+ * Scrollable area that displays the conversation
+ */
+.chatbot-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;
+}
+
+/* 
+ * Message Bubbles
+ * Base styles for all message bubbles
+ */
+.message {
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 75%;
+  word-wrap: break-word;
+}
+
+/* Bot message styling */
+.message.bot {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+  border-bottom-left-radius: 5px;
+}
+
+/* User message styling */
+.message.user {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+}
+
+/* 
+ * Loading Indicator
+ * Animated dots showing when the AI is generating a response
+ */
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Individual dots in the loading indicator */
+.loading-indicator span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #007bff;
+  animation: bouncing 1.4s infinite ease-in-out both;
+}
+
+/* Staggered animation timing for each dot */
+.loading-indicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-indicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+/* 
+ * Bouncing Animation
+ * Defines the size pulsing for the loading dots
+ */
+@keyframes bouncing {
+  0%, 80%, 100% { 
+    transform: scale(0);
+  } 
+  40% { 
+    transform: scale(1.0);
+  }
+}
+
+/* Disabled button state */
+.chatbot-send-button.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* 
+ * Input Container
+ * Section at the bottom with text input and send button
+ */
+.chatbot-input-container {
+  padding: 10px;
+  display: flex;
+  border-top: 1px solid #eee;
+}
+
+/* Text input field */
+.chatbot-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+}
+
+/* Send button */
+.chatbot-send-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* Send button hover state */
+.chatbot-send-button:hover {
+  background-color: #0069d9;
+}

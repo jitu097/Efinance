@@ -1,0 +1,289 @@
+.dashboard-nav {
+  width: 100%;
+  height: 70px; /* Fixed navbar height */
+  min-height: 70px;
+  max-height: 90px;
+  background:  linear-gradient(to right, #3b82f6,#1b57d8) !important; /* Navbar background color */
+  color: #a01717;
+  position: fixed !important; /* Keep navbar fixed at top of viewport */
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important; /* High z-index to stay above other elements */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+ border: none !important;
+outline: none !important;
+
+  border-radius: 0px 0px 9px 9px !important;  /* Rounded top corners */
+}
+
+
+/* Remove .navbar-logo and .efinance-logo if not used in JSX */
+
+.navbar-hamburger {
+  display: none; /* Hidden by default, shown in mobile view */
+  flex-direction: column;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.navbar-hamburger span {
+  display: block;
+  width: 32px;
+  height: 4px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.3rem;
+  transition: background 0.15s;
+  background: transparent !important; /* Light transparent white */
+
+ /* Dark background for navlink buttons */
+}
+
+.nav-links a.active, .nav-links a:hover {
+ background: #2563eb !important;
+  color: #ffffff !important; 
+ /* Darker background on active/hover */
+}
+
+.user-section {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Mobile drawer backdrop - overlay that appears behind the drawer */
+.navbar-drawer-backdrop {
+  position: fixed;
+  inset: 0; /* Shorthand for top, right, bottom, left = 0 */
+  background: rgba(0,0,0,0.25); /* Semi-transparent dark overlay */
+  z-index: 1000;
+  display: flex;
+}
+
+/* Mobile drawer - side menu container */
+.navbar-drawer {
+  background: #fff;
+  color: #222;
+  width: 240px;
+  max-width: 80vw; /* Responsive width */
+  height: 100%;
+  padding: 1.5rem 1rem 1rem 1.2rem;
+  box-shadow: 2px 0 16px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: slideInLeft 0.2s; /* Animation for drawer opening */
+}
+
+/* Drawer opening animation */
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* Close button for mobile drawer */
+.drawer-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #05173c;
+  cursor: pointer;
+}
+
+/* Container for links inside mobile drawer */
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Link button styling inside mobile drawer */
+.drawer-link-btn {
+  background: none;
+  border: none;
+  color: #082054;
+  font-size: 1.1rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.2rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+
+/* Hover state for drawer links */
+.drawer-link-btn:hover {
+  background: #e0e7ef;
+}
+
+/* User section inside mobile drawer */
+.drawer-user {
+  margin-top: auto; /* Push to bottom of drawer */
+  padding-top: 2rem;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 1024px) {
+  /* Adjust navbar for mobile */
+  .dashboard-nav {
+    padding: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    min-height: 70px;
+    max-height: 90px;
+    position: relative;
+  }
+  
+  /* Hide desktop navigation and user section on mobile */
+  .nav-links,
+  .user-section {
+    display: none !important;
+  }
+  
+  /* Show hamburger menu on mobile */
+  .navbar-hamburger {
+    display: flex;
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    order: 1;
+  }
+  
+  /* Center logo on mobile */
+  .navbar-logo-left {
+    position: absolute;
+    left: 50% !important;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+  }
+  
+  /* Add Overview button for mobile */
+  .mobile-overview-btn {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.3rem;
+    transition: background 0.15s;
+    font-size: 0.9rem;
+  }
+  
+  .mobile-overview-btn:hover,
+  .mobile-overview-btn.active {
+    background: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+  }
+  
+  /* Style the app title on mobile */
+  .efinance-title {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #f8f6f6;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 1025px) {
+  /* Desktop navbar layout */
+  .dashboard-nav {
+    width: 100%;
+    height: 70px;
+    min-height: 70px;
+    max-height: 90px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: relative;
+  }
+  
+  /* Center section container */
+  .navbar-center {
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 1.2rem;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+  }
+  
+  /* Position logo at left side */
+  .navbar-logo-left {
+    position: absolute;
+    left: 2rem ;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  /* Center navigation links */
+  .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    flex: unset;
+  }
+  
+  /* Position user section at right side */
+  .user-section {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

@@ -1,0 +1,538 @@
+/* Global color palette for consistent theming throughout the application */
+:root {
+  --primary-blue: #1a365d;    /* Dark blue for primary elements */
+  --secondary-blue: #2563eb;  /* Medium blue for secondary elements */
+  --accent-blue: #3b82f6;     /* Lighter blue for accents and highlights */
+  --success-green: #10b981;   /* Green for positive values and confirmations */
+  --warning-orange: #f59e0b;  /* Orange for warnings */
+  --danger-red: #ef4444;      /* Red for errors and negative values */
+  --light-bg: #f0f5ff;        /* Light blue background */
+  --card-bg: #ffffff;         /* White background for cards */
+  --text-dark: #0f172a;       /* Dark text color */
+  --text-muted: #475569;      /* Muted text for less emphasis */
+  --border-color: #cbd5e1;    /* Border color for separation */
+}
+
+/* Background with subtle pattern for visual interest */
+body {
+  padding-top: 70px; /* Space for fixed navbar */
+  margin: 0;
+  background: var(--light-bg) url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%232563eb' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E") fixed;
+}
+
+/* Ensure navbar stays fixed at top of viewport across all pages */
+.navbar, nav, .dashboard-nav {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+  width: 100% !important;
+}
+
+/* Main layout container with flexbox for responsive design */
+.transaction-layout {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding: 0 1rem;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+}
+
+/* Left column containing transaction form and table */
+.transaction-left-column {
+  flex: 1;
+  min-width: 300px;
+  max-width: 800px;
+  overflow-y: auto; /* Makes content scrollable if too tall */
+}
+
+/* Right column containing filter and chart */
+.transaction-right-column {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Transaction form container with stable positioning */
+.transaction-form-container {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Transaction table container with stable positioning */
+.transactions-table-container {
+  position: relative;
+}
+
+/* Filter form with gradient background and subtle shadow */
+.filter-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  background: linear-gradient(135deg, #f8fafc, #e0f2fe);
+  border-radius: 1rem;
+  border-left: 4px solid var(--secondary-blue);
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.07);
+  z-index: 2;
+  position: relative;
+}
+
+/* Filter form label styling */
+.filter-form label {
+  font-weight: 500;
+  color: #2563eb;
+  font-size: 1rem;
+}
+
+/* Filter form select dropdown styling */
+.filter-form select {
+  margin-left: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.3rem;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+/* Focus state for select dropdowns */
+.filter-form select:focus {
+  border: 1.5px solid #2563eb;
+}
+
+/* Body styling reset - simpler approach */
+body {
+  padding-top: 70px; /* Space for navbar */
+  margin: 0;
+  background: #f8fafc;
+}
+
+/* Remove problematic body::before pseudo-element */
+body::before {
+  display: none;
+}
+
+/* Page header with space for actions */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Generic add button styling */
+.add-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 18px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+/* Hover state for add button */
+.add-btn:hover {
+  background: #125ea2;
+}
+
+/* Card container for content sections with subtle hover animation */
+.page-container {
+  background: var(--card-bg);
+  border-radius: 1.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 2.2rem 1.8rem;
+  margin-bottom: 2.5rem;
+  margin-top: 0;
+  border-top: 5px solid var(--secondary-blue);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for card containers */
+.page-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.12), 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Primary heading within cards */
+.page-container h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.8rem;
+  letter-spacing: -0.5px;
+}
+
+/* Decorative underline for primary headings */
+.page-container h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary-blue), var(--accent-blue));
+  border-radius: 2px;
+}
+
+/* Secondary heading within cards */
+.page-container h3 {
+  font-size: 1.5rem;
+  color: var(--primary-blue);
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+}
+
+/* Transaction form with glassmorphism effect */
+.transaction-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(5px);
+}
+
+/* Common styling for all form input elements */
+.transaction-form input[type="text"],
+.transaction-form input[type="number"],
+.transaction-form input[type="date"],
+.transaction-form select {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  font-size: 1.05rem;
+  padding: 0.8rem 1rem;
+  width: 100%;
+  max-width: 220px;
+  color: #000000;
+  font-weight: 600;
+}
+
+/* Placeholder text styling for inputs */
+.transaction-form input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+/* Focus state for input fields */
+.transaction-form input:focus {
+  border: 1.5px solid #2563eb;
+  color: #000000;
+  font-weight: 700; /* Bolder on focus for emphasis */
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Submit button with gradient and hover effect */
+.transaction-form button {
+  background: linear-gradient(45deg, var(--primary-blue), var(--secondary-blue));
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+/* Hover effect for submit button */
+.transaction-form button:hover {
+  background: linear-gradient(45deg, var(--secondary-blue), var(--accent-blue));
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Special styling for date picker */
+.transaction-form input[type="date"] {
+  font-weight: 700;
+  border-left: 4px solid var(--accent-blue);
+  background-color: rgba(59, 130, 246, 0.05);
+  color: var(--primary-blue);
+  letter-spacing: 0.03em;
+  padding-left: 1rem;
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.1);
+}
+
+/* Focus state for date picker */
+.transaction-form input[type="date"]:focus {
+  border-color: var(--accent-blue);
+  background-color: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 3px 12px rgba(37, 99, 235, 0.18);
+}
+
+/* Transaction type dropdown styling */
+.transaction-form select[name="type"] {
+  font-weight: 800;
+  background: #ffffff;
+  border: 2px solid var(--accent-blue);
+  padding: 0.9rem 1.2rem;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  color: var(--primary-blue);
+}
+
+/* Credit option styling in transaction type dropdown */
+.transaction-form select[name="type"] option[value="Credit"] {
+  background-color: var(--success-green);
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+}
+
+/* Debit option styling in transaction type dropdown */
+.transaction-form select[name="type"] option[value="Debit"] {
+  background-color: var(--danger-red);
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+}
+
+/* Calendar icon styling in date picker */
+.transaction-form input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7); /* Makes icon darker */
+  opacity: 0.9;
+  padding: 4px;
+  cursor: pointer;
+}
+
+/* Calendar icon hover state */
+.transaction-form input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  filter: invert(0.9); /* Darker on hover */
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+/* Custom scrollbar for .transactions-list */
+.transactions-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.transactions-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.transactions-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.transactions-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Scrollable transaction list container */
+.transactions-list {
+  max-height: 300px; /* Fixed height for scrolling */
+  overflow-y: auto;
+  margin-top: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.8rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  /* overflow: hidden; */
+}
+
+/* Transaction table styling */
+.transactions-list table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #f8fafc;
+}
+
+/* Sticky header for transaction table */
+.transactions-list thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: linear-gradient(45deg, var(--primary-blue), var(--secondary-blue));
+}
+
+/* Table cell padding and alignment */
+.transactions-list th,
+.transactions-list td {
+  padding: 0.7rem 0.5rem;
+  text-align: left;
+}
+
+/* Table header styling */
+.transactions-list th {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+/* Zebra striping for better readability */
+.transactions-list tr:nth-child(even) {
+  background: #e0e7ef;
+}
+
+/* Row hover effect */
+.transactions-list tr:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+/* Description column styling */
+.transactions-list td:first-child {
+  color: #1e293b;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Date column styling */
+.transactions-list td:nth-child(3) {
+  color: #2563eb;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Empty state message */
+.no-transactions {
+  color: #64748b;
+  text-align: center;
+  padding: 1.2rem 0;
+  font-style: italic;
+}
+
+/* Credit amount styling without background */
+.credit-amount {
+  color: var(--success-green);
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.3rem;
+}
+
+/* Debit amount styling without background */
+.debit-amount {
+  color: var(--danger-red);
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.3rem;
+}
+
+/* Credit type label styling without background */
+.credit-type {
+  color: var(--success-green);
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.3rem;
+  text-align: center;
+}
+
+/* Debit type label styling without background */
+.debit-type {
+  color: var(--danger-red);
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.3rem;
+  text-align: center;
+}
+
+/* Timestamp display styling */
+.timestamp-bar {
+  text-align: right;
+  color: #2563eb;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Chart container styling */
+.transactions-graph-container {
+  background: var(--card-bg);
+  border-radius: 1.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative accent for chart container */
+.transactions-graph-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, transparent 50%, rgba(59, 130, 246, 0.1));
+  border-radius: 0 0 0 100px;
+}
+
+/* Error message styling */
+.error-message {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger-red);
+  padding: 0.8rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--danger-red);
+  font-weight: 500;
+}
+
+/* Loading state message */
+.loading-message {
+  color: var(--accent-blue);
+  font-weight: 500;
+  text-align: center;
+  padding: 1.5rem 0;
+  font-style: italic;
+}
+
+/* Animation for stock market ticker effect */
+@keyframes stockMarket {
+  0% { background-position-x: 0; }
+  100% { background-position-x: 1000px; }
+}
+
+/* Decorative ticker-like animation at bottom of cards */
+.page-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(90deg, 
+    var(--success-green), var(--success-green) 20px, 
+    transparent 20px, transparent 30px,
+    var(--danger-red) 30px, var(--danger-red) 45px,
+    transparent 45px, transparent 55px,
+    var(--success-green) 55px, var(--success-green) 80px,
+    transparent 80px, transparent 90px,
+    var(--danger-red) 90px, var(--danger-red) 110px,
+    transparent 110px, transparent 120px);
+  background-size: 1000px 8px;
+  border-radius: 0 0 1.2rem 1.2rem;
+  opacity: 0.3;
+  animation: stockMarket 80s linear infinite;
+}

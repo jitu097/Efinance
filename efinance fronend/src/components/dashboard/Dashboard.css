@@ -1,0 +1,636 @@
+/* Dashboard Layout */
+.dashboard-layout {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 2.5rem 1rem 2rem 1rem;
+  background: rgba(248, 250, 252, 0.8);
+  min-height: 80vh;
+}
+
+.dashboard {
+  background-color: #f7f5f9;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px rgba(37, 99, 235, 0.08), 0 1.5px 4px rgba(0,0,0,0.04);
+  padding: 2.5rem 2rem;
+  max-width: 1100px;
+  margin: 2rem auto;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem; /* Add space between main dashboard and charts */
+}
+
+.dashboard h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color:#2563eb;
+  margin-bottom: 2.5rem;
+  letter-spacing: -1px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.dashboard-card {
+  background: linear-gradient(120deg, #f1f5fd 0%, #e0e7ef 100%);
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.06);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.dashboard-card:hover {
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.13);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.dashboard-card h3 {
+  font-size: 1.3rem;
+  color: #2563eb;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+/* Updated card styles */
+.card-content {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.card-content i {
+  font-size: 2.5rem;
+  color: #1e40af;
+  margin-bottom: 1rem;
+}
+
+.card-content p {
+  color: #64748b;
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-action {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.view-all-button {
+  display: inline-block;
+  background: linear-gradient(to right, #6e70db, #5489de);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.2);
+}
+
+.view-all-button:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+.dashboard-nav {
+  display: flex;
+  justify-content: center; /* Center nav-links */
+  align-items: center;
+  padding: 1.2rem 0;
+  background: #bdf2fb;
+  border-bottom: 1px solid #070707;
+  gap: 2rem;
+  position: relative;
+}
+
+/* Nav logo: top-left, bold, bold color */
+.navbar-logo-left {
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+}
+
+.efinance-title {
+  font-weight: bold;
+  color: white;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.user-section {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+/* Enhanced timestamp styles */
+.dashboard-timestamp {
+  position: fixed;
+  top: 80px; /* Position just below navbar */
+  right: 1px;
+  background: transparent;
+  padding: 8px 1px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #1e40af;
+
+  z-index: 990; /* Below navbar but above content */
+  
+  transition: all 0.3s ease;
+}
+
+.dashboard-timestamp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+/* Separate graph section */
+.dashboard-graph-section {
+  margin-top: 2.5rem;
+  width: 100%;
+}
+
+.dashboard-graph-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Dashboard graph styles */
+.dashboard-graph {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1.8rem;
+  position: relative;
+  overflow: hidden;
+  border-top: 5px solid #2563eb;
+  transition: transform 0.3s ease;
+}
+
+.dashboard-graph:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(37, 99, 235, 0.15);
+}
+
+.dashboard-graph h3 {
+  font-size: 1.4rem;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+}
+
+.dashboard-graph h3::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  border-radius: 2px;
+}
+
+/* Standalone Graph Container (outside grid) */
+.standalone-graph-container {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08), 0 1px 3px rgba(0,0,0,0.04);
+  padding: 2rem;
+  margin-top: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  border-top: 5px solid #2563eb;
+  transition: transform 0.3s ease;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 55%; /* Reduced from full/default width */
+}
+
+.standalone-graph-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.12);
+}
+
+.standalone-graph-container h3 {
+  font-size: 1.5rem;
+  color: #2563eb;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+}
+
+.standalone-graph-container h3::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  border-radius: 2px;
+}
+
+/* Corner Graph Container positioning */
+.corner-graph-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 350px;
+  z-index: 90;
+}
+
+.corner-graph-box {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15), 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  border-left: 5px solid #2563eb;
+  transition: transform 0.3s ease;
+}
+
+.corner-graph-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.2);
+}
+
+.corner-graph-box h3 {
+  font-size: 1.2rem;
+  color: #2563eb;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Normal graph styling without fixed positioning */
+.normal-graph {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08), 0 1px 3px rgba(0,0,0,0.05);
+  padding: 2rem;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  position: relative; /* Not fixed, behaves normally */
+  overflow: hidden;
+  border-top: 5px solid #2563eb;
+  width: 55%; /* Reduced from full/default width */
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.normal-graph h3 {
+  font-size: 1.5rem;
+  color: #2563eb;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.graph-container {
+  width: 100%;
+  height: 280px; /* Slightly reduced height for better proportions */
+  position: relative;
+}
+
+/* Pie chart specific styling */
+.pie-box {
+  border-top-color: #8b5cf6; /* Purple accent for the pie chart box */
+}
+
+.pie-box h3 {
+  color: #7c3aed;
+}
+
+.pie-box h3::after {
+  background: linear-gradient(90deg, #8b5cf6, #a78bfa);
+}
+
+.pie-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 280px;
+  position: relative;
+}
+
+.pie-totals {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.pie-total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.expense-total {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.investment-total {
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.pie-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 0.25rem;
+}
+
+.pie-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.expense-total .pie-value {
+  color: #dc2626;
+}
+
+.investment-total .pie-value {
+  color: #059669;
+}
+
+/* Dashboard charts wrapper outside of main dashboard */
+.dashboard-charts-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Separate chart boxes layout */
+.dashboard-charts-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Common styling for chart boxes */
+.chart-box {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.chart-box h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+
+.chart-box h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+/* Chart container */
+.chart-container {
+  width: 100%;
+  height: 250px;
+  position: relative;
+}
+
+/* Specific styling for each chart type */
+.transaction-chart-box {
+  border-top: 5px solid #2563eb; /* Blue */
+}
+
+.transaction-chart-box h3 {
+  color: #2563eb;
+}
+
+.transaction-chart-box h3::after {
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+}
+
+.expenses-chart-box {
+  border-top: 5px solid #2563eb; /* Red */
+}
+
+.expenses-chart-box h3 {
+  color: #2563eb;
+}
+
+.expenses-chart-box h3::after {
+  background: linear-gradient(90deg, #ef4444, #f87171);
+}
+
+.investments-chart-box {
+  border-top: 5px solid #2563eb; /* Green */
+}
+
+.investments-chart-box h3 {
+  color:#2563eb;
+}
+
+.investments-chart-box h3::after {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+/* Add loading and error states for charts */
+.charts-loading, .charts-error {
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.charts-loading p {
+  color: #3b82f6;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.charts-error p {
+  color: #ef4444;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/* Dashboard filter form styling */
+.dashboard-filter-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+/* Filter form container */
+.filter-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+/* Import filter form styles from Transaction.css */
+.filter-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  background: linear-gradient(135deg, #f8fafc, #e0f2fe);
+  border-radius: 1rem;
+  border-left: 4px solid #2563eb;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.07);
+  z-index: 2;
+  position: relative;
+}
+
+.filter-form label {
+  font-weight: 500;
+  color: #2563eb;
+  font-size: 1rem;
+}
+
+.filter-form select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: #eef2f5; /* Changed from white to light blue-grey */
+  color: #333; /* Set text color to a dark grey */
+  appearance: none; /* Remove default select arrow */
+  /* Updated SVG fill color to blue (#2563eb) */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%232563eb%22%20d%3D%22M287%2069.9a14.4%2014.4%200%200%200-20.4%200L146.2%20190.3%2025.8%2069.9A14.4%2014.4%200%200%200%205.4%2090.3L135.8%20220.8a14.4%2014.4%200%200%200%2020.4%200L287%2090.3a14.4%2014.4%200%200%200%200-20.4z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 1px top 50%;
+  background-size: 9px;
+  cursor: pointer;
+}
+.filter-form select:focus {
+  border: 1.5px solid #2563eb;
+}
+
+/* Responsive behavior for filter form */
+@media (max-width: 640px) {
+  .dashboard-filter-container {
+    justify-content: center;
+  }
+  
+  .dashboard-filter-form {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+  
+  .dashboard-filter-form label {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard {
+    padding: 1.5rem 0.5rem;
+  }
+  .dashboard-grid {
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard {
+    padding: 1rem 0.2rem;
+  }
+  .dashboard h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+  .dashboard-card {
+    padding: 1.2rem 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .corner-graph-container {
+    position: static;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dashboard-charts-section {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .investments-chart-box {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-charts-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .investments-chart-box {
+    grid-column: span 1;
+  }
+  
+  .chart-container {
+    height: 220px;
+  }
+}

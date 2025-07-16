@@ -1,0 +1,507 @@
+/* Define a custom color palette specific to the Upgrade page with a blue theme */
+:root {
+  --upgrade-primary: #2563eb; /* Blue theme for upgrade */
+  --upgrade-secondary: #3b82f6;
+  --upgrade-accent: #60a5fa;
+  --upgrade-dark: #1e7aaf;
+  --upgrade-light: #eff6ff;
+  --upgrade-warning: #fb923c;
+  --upgrade-danger: #f43f5e;
+  --upgrade-success: #10b981;
+  --upgrade-border: #93c5fd;
+  --upgrade-text: #1e293b;
+  --upgrade-muted: #64748b;
+}
+
+/* Fix navbar at the top of the viewport to ensure consistent navigation */
+.navbar, nav, .dashboard-nav {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+  width: 100% !important;
+}
+
+/* Set body padding to accommodate fixed navbar and define overall theme */
+body {
+  padding-top: 70px;
+  margin: 0;
+  background: #ffffff;
+  height: auto;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Main container layout for upgrade page - uses flexbox for responsive design */
+.upgrade-layout {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding: 0 1rem;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  position: relative;
+  background: #ffffff;
+}
+
+/* Individual page containers with shadow and border effects */
+.page-container {
+  max-width: 700px;
+  margin: 2.5rem auto;
+  background: #eae6e6;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.1);
+  padding: 2rem 1.5rem;
+  border-top: 5px solid var(--upgrade-primary);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Animated hover effect for page containers */
+.page-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+}
+
+/* Decorative Crown sign in the background of containers */
+.page-container::before {
+  content: '👑';
+  position: absolute;
+  top: -15px;
+  right: 20px;
+  font-size: 70px;
+  opacity: 0.07;
+  z-index: 0;
+  line-height: 1;
+}
+
+/* Heading styles with decorative underline */
+.page-container h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--upgrade-primary);
+  margin-bottom: 1.2rem;
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+/* Decorative underline for headings */
+.page-container h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 70px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--upgrade-primary), var(--upgrade-accent));
+  border-radius: 2px;
+}
+
+/* Content container within page containers */
+.upgrade-content {
+  padding: 1rem 0.5rem;
+}
+
+/* Text styling within content areas */
+.upgrade-content p {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Pro Status Banner */
+.pro-status-banner {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  background: rgba(16, 185, 129, 0.85);
+  padding: 2rem;
+  border: 2px solid #10b981;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15) !important;
+  border-radius: 0.8rem;
+  backdrop-filter: blur(5px);
+  color: white;
+  font-weight: 600;
+  align-items: center;
+}
+
+.pro-status-banner i {
+  color: #fbbf24;
+  font-size: 1.2rem;
+}
+
+/* Upgrade Header */
+.upgrade-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.upgrade-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--upgrade-primary);
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+.upgrade-header p {
+  color: #64748b;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+/* Pricing Section */
+.pricing-section {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  background: rgba(239, 246, 255, 0.85);
+  padding: 2rem;
+  border: 2px solid var(--upgrade-border);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15) !important;
+  border-radius: 0.8rem;
+  backdrop-filter: blur(5px);
+  justify-content: center;
+}
+
+.plan-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.plan-toggle {
+  display: flex;
+  background: rgba(37, 99, 235, 0.1);
+  border-radius: 0.6rem;
+  padding: 4px;
+  border: 2px solid var(--upgrade-border);
+}
+
+.plan-toggle button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: var(--upgrade-dark);
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+.plan-toggle button.active {
+  background: var(--upgrade-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Pricing Card */
+.pricing-card {
+  background: #73b0c3;
+  border: 2px solid var(--upgrade-border);
+  border-radius: 0.8rem;
+  padding: 2rem;
+  text-align: center;
+  min-width: 300px;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+}
+
+.price-display {
+  margin-bottom: 1.5rem;
+}
+
+.price-display .currency {
+  font-size: 1.5rem;
+  color: var(--upgrade-dark);
+  vertical-align: top;
+  font-weight: 800;
+}
+
+.price-display .amount {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--upgrade-primary);
+  margin: 0 0.25rem;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.price-display .period {
+  font-size: 1.25rem;
+  color: var(--upgrade-dark);
+  font-weight: 600;
+}
+
+/* Upgrade Button */
+.upgrade-button {
+  background: linear-gradient(45deg, var(--upgrade-primary), var(--upgrade-secondary));
+  color: #7a95d0;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.upgrade-button:hover:not(:disabled) {
+  background: linear-gradient(45deg, var(--upgrade-dark), var(--upgrade-primary));
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+  transform: translateY(-2px);
+}
+
+.upgrade-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Current Plan Button */
+.current-plan-button {
+  background: linear-gradient(45deg, var(--upgrade-success), #059669);
+  color: white;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: not-allowed;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  box-shadow: 0 6px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Features Section */
+.features-section {
+  margin-bottom: 2rem;
+}
+
+.features-section h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--upgrade-primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+.features-section h3::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--upgrade-primary), var(--upgrade-accent));
+  border-radius: 2px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background: rgba(239, 246, 255, 0.85);
+  border: 2px solid var(--upgrade-border);
+  border-radius: 0.8rem;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+  backdrop-filter: blur(5px);
+}
+
+.feature-card:hover {
+  border-color: var(--upgrade-primary);
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+  transform: translateY(-5px);
+}
+
+.feature-card.available {
+  border-color: var(--upgrade-success);
+  background: rgba(240, 253, 244, 0.85);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+}
+
+.feature-card.locked {
+  opacity: 0.7;
+  background: rgba(248, 250, 252, 0.85);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--upgrade-primary);
+  margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+  color: var(--upgrade-muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.feature-status {
+  display: flex;
+  justify-content: center;
+}
+
+.status-available {
+  background: linear-gradient(45deg, var(--upgrade-success), #059669);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+.status-locked {
+  background: linear-gradient(45deg, var(--upgrade-muted), #475569);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(100, 116, 139, 0.3);
+}
+
+/* Payment Info Section */
+.payment-info {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  background: rgba(239, 246, 255, 0.85);
+  padding: 2rem;
+  border: 2px solid var(--upgrade-border);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15) !important;
+  border-radius: 0.8rem;
+  backdrop-filter: blur(5px);
+  justify-content: center;
+}
+
+.payment-card {
+  text-align: center;
+  max-width: 400px;
+}
+
+.payment-card i {
+  font-size: 2.5rem;
+  color: var(--upgrade-success);
+  margin-bottom: 1rem;
+}
+
+.payment-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--upgrade-primary);
+  margin-bottom: 0.5rem;
+}
+
+.payment-card p {
+  color: var(--upgrade-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+  .page-container {
+    padding: 1rem 0.3rem;
+  }
+  
+  .page-container h2 {
+    font-size: 1.2rem;
+  }
+  
+  .upgrade-content {
+    padding: 0.5rem 0.1rem;
+  }
+  
+  .upgrade-content p {
+    font-size: 0.98rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .plan-toggle {
+    width: 100%;
+  }
+  
+  .pricing-card {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .price-display .amount {
+    font-size: 2.5rem;
+  }
+  
+  .pricing-section,
+  .pro-status-banner,
+  .payment-info {
+    padding: 1.5rem;
+  }
+}

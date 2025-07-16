@@ -1,0 +1,478 @@
+/* Define a custom color palette specific to the Expenses page with a purple theme */
+:root {
+  --expense-primary: #7c3aed; /* Purple theme for expenses */
+  --expense-secondary: #a855f7;
+  --expense-accent: #c084fc;
+  --expense-dark: #4c1d95;
+  --expense-light: #f5f3ff;
+  --expense-warning: #fb923c;
+  --expense-danger: #f43f5e;
+  --expense-success: #34d399;
+  --expense-border: #d8b4fe;
+  --expense-text: #1e293b;
+  --expense-muted: #64748b;
+}
+
+/* Fix navbar at the top of the viewport to ensure consistent navigation */
+.navbar, nav, .dashboard-nav {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+  width: 100% !important;
+}
+
+/* Set body padding to accommodate fixed navbar and define overall theme */
+body {
+  padding-top: 70px;
+  margin: 0;
+  background: #5281b0;
+  height: auto;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Main container layout for expenses page - uses flexbox for responsive design */
+.expenses-layout {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding: 0 1rem;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  position: relative;
+  background: var(--expense-light) url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23a855f7' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 20.01L20 0v1.41l-18.6 18.6H0v-.01zm2.83-2.83L40 0v1.41L3.41 38H2v-1.41zM40 1.41L38.59 0 40 0v1.41z'/%3E%3C/g%3E%3C/svg%3E") fixed;
+}
+
+/* Left column for form and transaction table - flex item */
+.expenses-left-column {
+  flex: 1;
+  min-width: 300px;
+  max-width: 800px;
+  border-right: 1px dashed var(--expense-border);
+}
+
+/* Right column for filter and chart - flex item */
+.expenses-right-column {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Individual page containers with shadow and border effects */
+.page-container {
+  max-width: 700px;
+  margin: 2.5rem auto;
+  background: #db5a5a;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.1);
+  padding: 2rem 1.5rem;
+  border-top: 5px solid var(--expense-primary);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Animated hover effect for page containers */
+.page-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(124, 58, 237, 0.15);
+}
+
+/* Decorative Rupee sign in the background of containers */
+.page-container::before {
+  content: '₹';
+  position: absolute;
+  top: -15px;
+  right: 20px;
+  font-size: 70px;
+  font-weight: bold;
+  color: rgba(124, 58, 237, 0.07);
+  z-index: 0;
+  line-height: 1;
+}
+
+/* Heading styles with decorative underline */
+.page-container h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--expense-primary);
+  margin-bottom: 1.2rem;
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+/* Decorative underline for headings */
+.page-container h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 70px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--expense-primary), var(--expense-accent));
+  border-radius: 2px;
+}
+
+/* Content container within page containers */
+.content {
+  padding: 1rem 0.5rem;
+}
+
+/* Text styling within content areas */
+.content p {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+  .page-container {
+    padding: 1rem 0.3rem;
+  }
+  .page-container h2 {
+    font-size: 1.2rem;
+  }
+  .content {
+    padding: 0.5rem 0.1rem;
+  }
+  .content p {
+    font-size: 0.98rem;
+  }
+}
+
+/* Form styling with purple theme for expenses */
+.expense-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  background: rgba(245, 243, 255, 0.85); /* More opaque background */
+  padding: 2rem;
+  border: 2px solid var(--expense-border);
+  box-shadow: 0 8px 20px rgba(198, 96, 44, 0.15) !important;
+  border-radius: 0.8rem;
+  backdrop-filter: blur(5px);
+}
+
+/* Input field styling with consistent design */
+.expense-form input[type="text"],
+.expense-form input[type="number"],
+.expense-form input[type="date"],
+.expense-form select {
+  padding: 1rem 1.2rem;
+  border: 2px solid var(--expense-border);
+  border-radius: 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--expense-dark);
+  outline: none;
+  transition: all 0.2s;
+  background: #73b0c3;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.08);
+  letter-spacing: 0.02em;
+}
+
+/* Text input fields with higher contrast for better readability */
+.expense-form input[type="text"],
+.expense-form input[type="number"] {
+  color: #000000;
+  font-weight: 700; /* Bold text */
+  background-color: #ffffff; /* Pure white background */
+  border-width: 2px; /* Thicker border */
+}
+
+/* Placeholder text styling to differentiate from actual input */
+.expense-form input::placeholder {
+  color: rgba(76, 29, 149, 0.4);
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+/* Focus state styling for input fields */
+.expense-form input:focus {
+  color: #000000;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Date field with special styling to highlight it */
+.expense-form input[type="date"] {
+  font-weight: 800;
+  border-left: 5px solid var(--expense-accent);
+  background-color: rgba(124, 58, 237, 0.08);
+  color: var(--expense-dark);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Calendar icon customization for date picker */
+.expense-form input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7); /* Makes the calendar icon darker (closer to black) */
+  opacity: 0.9;
+  padding: 4px;
+  cursor: pointer;
+  transform: scale(1.2); /* Make it slightly larger */
+}
+
+/* Hover effect for calendar icon */
+.expense-form input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  filter: invert(0.9); /* Almost black on hover */
+  background-color: rgba(76, 29, 149, 0.1); /* Purple tinted hover */
+  border-radius: 3px;
+}
+
+/* Category selector with distinct purple styling */
+.expense-form select[name="category"] {
+  font-weight: 800;
+  background-color: var(--expense-dark);
+  color: white;
+  border: 2px solid var(--expense-secondary);
+  padding: 0.9rem 1.2rem;
+  box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3);
+  letter-spacing: 0.03em;
+}
+
+/* Dropdown option styling for category */
+.expense-form select[name="category"] option {
+  background-color: var(--expense-dark);
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* Different styling for dropdown options when open */
+.expense-form select[name="category"] option {
+  background-color: rgb(93, 169, 183);
+  color: var(--expense-dark);
+  font-weight: 700;
+  padding: 10px;
+}
+
+/* Hover effect for category dropdown */
+.expense-form select[name="category"]:hover {
+  background: linear-gradient(to right, rgba(124, 58, 237, 0.12), rgba(168, 85, 247, 0.18));
+  border-color: var(--expense-primary);
+}
+
+/* Focus effects for all form elements */
+.expense-form input:focus,
+.expense-form select:focus {
+  border: 2px solid var(--expense-primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Submit button styling with purple gradient */
+.expense-form button {
+  background: linear-gradient(45deg, var(--expense-primary), var(--expense-secondary));
+  color: #7a95d0;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(124, 58, 237, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Hover effect for submit button */
+.expense-form button:hover {
+  background: linear-gradient(45deg, var(--expense-dark), var(--expense-primary));
+  box-shadow: 0 6px 15px rgba(124, 58, 237, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Scrollable expenses list with fixed height */
+.expenses-list {
+  max-height: 300px; /* Fixed height - adjust as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-top: 1rem;
+  border: 1px solid var(--expense-border);
+  box-shadow: 0 5px 15px rgba(124, 58, 237, 0.07);
+}
+
+/* Table styling within expenses list */
+.expenses-list table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #23507c;
+}
+
+/* Fixed header for the scrollable table */
+.expenses-list thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: linear-gradient(45deg, var(--expense-primary), var(--expense-secondary));
+}
+
+/* Table header styling */
+.expenses-list th {
+  background: transparent;
+  color: #b647d5;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+/* Zebra striping for table rows */
+.expenses-list tr:nth-child(even) {
+  background: rgba(245, 243, 255, 0.5);
+}
+
+/* Hover effect for table rows */
+.expenses-list tr:hover {
+  background: rgba(124, 58, 237, 0.05);
+}
+
+/* Special styling for category column in table */
+.expenses-list td:last-child {
+  font-weight: 600;
+  border-left: 3px solid var(--expense-accent);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+/* Bullet point decoration for category column */
+.expenses-list td:last-child::before {
+  content: '•';
+  position: absolute;
+  left: 0.5rem;
+  color: var(--expense-primary);
+}
+
+/* Empty state message when no expenses */
+.no-expenses {
+  color: var(--expense-muted);
+  text-align: center;
+  padding: 1.2rem 0;
+  font-style: italic;
+}
+
+/* Filter form with purple theme */
+.expenses-filter-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  background: linear-gradient(135deg, #6367d6, rgba(245, 243, 255, 0.8));
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1);
+  border-left: 4px solid var(--expense-primary);
+  z-index: 2;
+  position: relative;
+}
+
+/* Filter form labels */
+.expenses-filter-form label {
+  font-weight: 600;
+  color: var(--expense-primary);
+  font-size: 1rem;
+}
+
+/* Filter dropdowns styling */
+.expenses-filter-form select {
+  margin-left: 0.4rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--expense-border);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s;
+  background-color: #4376c4;
+}
+
+/* Focus effect for filter dropdowns */
+.expenses-filter-form select:focus {
+  border: 1.5px solid var(--expense-secondary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+/* Expenses graph container styling */
+.expenses-graph-container {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-top: 5px solid var(--expense-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Chart icon decoration */
+.expenses-graph-container::before {
+  content: '📊';
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  opacity: 0.2;
+}
+
+/* Graph heading styles */
+.expenses-graph-container h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--expense-primary);
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+/* Add receipt-like animation to bottom of cards */
+@keyframes receiptWave {
+  0% { background-position-x: 0; }
+  100% { background-position-x: 1000px; }
+}
+
+/* Decorative receipt-like edge at the bottom of cards */
+.page-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--expense-border),
+    var(--expense-border) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  border-radius: 0 0 1rem 1rem;
+  opacity: 0.5;
+  animation: receiptWave 80s linear infinite;
+}
+
+/* Responsive layout adjustments for different screen sizes */
+@media (max-width: 900px) {
+  .expenses-layout {
+    flex-direction: column;
+  }
+  
+  .expenses-left-column,
+  .expenses-right-column {
+    max-width: 100%;
+  }
+  
+  .expenses-filter-form {
+    position: static;
+    margin-bottom: 1.5rem;
+  }
+  
+  .expenses-graph-container {
+    max-width: 100%;
+  }
+}
