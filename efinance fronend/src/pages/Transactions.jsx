@@ -130,17 +130,19 @@ const Transactions = () => {
       await deleteTransaction(transactionId);
       
       // Remove transaction from state after successful deletion
-      setTransactions(prev => prev.filter(txn => txn.id !== transactionId));
+      setTransactions(prev => prev.filter(txn => txn._id !== transactionId));
       
+      // Display success message
+      setError(''); // Clear any previous errors
     } catch (err) {
       console.error('Error deleting transaction:', err);
-      setError('Failed to delete transaction');
+      setError('Failed to delete transaction: ' + (err.message || 'Unknown error'));
     }
   };
 
   // Handler for starting edit mode
   const handleEdit = (transaction) => {
-    setEditingId(transaction.id);
+    setEditingId(transaction._id);
     setForm({
       description: transaction.description,
       amount: transaction.amount,
@@ -192,8 +194,8 @@ const Transactions = () => {
       // Add imported transactions to state
       const transactionsWithUserId = importedTransactions.map(txn => ({
         ...txn,
-        userId: user.id,
-        id: `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+        userId: user.id
+        // MongoDB will generate _id when saved
       }));
 
       // Batch create transactions (you might want to add this to your API)
@@ -335,28 +337,11 @@ const Transactions = () => {
           </div>
           <div className="content">
             {/* CSV Upload Section */}
-            <div className="csv-upload-section" style={{
-              marginBottom: '1.5rem',
-              padding: '1rem',
-              background: 'rgba(37, 99, 235, 0.05)',
-              border: '2px dashed #2563eb',
-              borderRadius: '0.5rem'
-            }}>
-              <h4 style={{ 
-                color: '#2563eb', 
-                marginBottom: '0.5rem', 
-                fontSize: '1rem',
-                textAlign: 'center' 
-              }}>
+            <div className="csv-upload-section">
+              <h4 className="csv-upload-title">
                 📊 Import Bank Statement (CSV/PDF)
               </h4>
-              <p style={{ 
-                fontSize: '0.85rem', 
-                color: '#64748b', 
-                marginBottom: '1rem',
-                textAlign: 'center',
-                lineHeight: '1.4'
-              }}>
+              <p className="csv-upload-description">
                 Upload your bank statement CSV or PDF file. Supports columns: Date, Description, Amount, Type
               </p>
               
@@ -366,29 +351,13 @@ const Transactions = () => {
               />
               
               {uploadSuccess && (
-                <div style={{ 
-                  color: '#10b981', 
-                  fontSize: '0.9rem', 
-                  marginTop: '0.75rem',
-                  padding: '0.5rem',
-                  background: 'rgba(16, 185, 129, 0.1)',
-                  borderRadius: '0.25rem',
-                  textAlign: 'center'
-                }}>
+                <div className="upload-success-message">
                   ✅ {uploadSuccess}
                 </div>
               )}
               
               {uploadError && (
-                <div style={{ 
-                  color: '#ef4444', 
-                  fontSize: '0.9rem', 
-                  marginTop: '0.75rem',
-                  padding: '0.5rem',
-                  background: 'rgba(239, 68, 68, 0.1)',
-                  borderRadius: '0.25rem',
-                  textAlign: 'center'
-                }}>
+                <div className="upload-error-message">
                   ❌ {uploadError}
                 </div>
               )}
@@ -461,46 +430,43 @@ const Transactions = () => {
                       <th>Actions</th>
                     </tr>
                   </thead>
-                </table>
-                <div className="table-body-container">
-                  <table>
-                    <tbody>
-                      {/* Map through filtered transactions to generate table rows */}
-                      {filteredTransactions.map((txn) => (
-                        <tr key={txn.id}>
-                          {/* Conditional rendering for edit mode */}
-                          {editingId === txn.id ? (
-                            // Edit mode - show input fields
-                            <>
-                              <td>
-                                <input
-                                  type="text"
-                                  value={form.description}
-                                  onChange={(e) => setForm({ ...form, description: e.target.value })}
-                                  style={{ width: '100%', padding: '4px', border: '1px solid #ccc' }}
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="number"
-                                  value={form.amount}
-                                  onChange={(e) => setForm({ ...form, amount: e.target.value })}
-                                  style={{ width: '100%', padding: '4px', border: '1px solid #ccc' }}
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="date"
-                                  value={form.date}
-                                  onChange={(e) => setForm({ ...form, date: e.target.value })}
-                                  style={{ width: '100%', padding: '4px', border: '1px solid #ccc' }}
-                                />
-                              </td>
+                  <tbody>
+                    {/* Map through filtered transactions to generate table rows */}
+                    {filteredTransactions.map((txn) => (
+                      <tr key={txn._id}>
+                        {/* Conditional rendering for edit mode */}
+                        {editingId === txn._id ? (
+                          // Edit mode - show input fields
+                          <>
+                            <td>
+                              <input
+                                type="text"
+                                value={form.description}
+                                onChange={(e) => setForm({ ...form, description: e.target.value })}
+                                className="table-edit-input"
+                              />
+                            </td>
+                            <td>
+                              <input
+                                type="number"
+                                value={form.amount}
+                                onChange={(e) => setForm({ ...form, amount: e.target.value })}
+                                className="table-edit-input"
+                              />
+                            </td>
+                            <td>
+                              <input
+                                type="date"
+                                value={form.date}
+                                onChange={(e) => setForm({ ...form, date: e.target.value })}
+                                className="table-edit-input"
+                              />
+                            </td>
                               <td>
                                 <select
                                   value={form.type}
                                   onChange={(e) => setForm({ ...form, type: e.target.value })}
-                                  style={{ width: '100%', padding: '4px', border: '1px solid #ccc' }}
+                                  className="table-edit-select"
                                 >
                                   <option value="Credit">Credit</option>
                                   <option value="Debit">Debit</option>
@@ -508,31 +474,14 @@ const Transactions = () => {
                               </td>
                               <td>
                                 <button 
-                                  onClick={() => handleSaveEdit(txn.id)}
-                                  style={{
-                                    color: 'green',
-                                    border: 'none',
-                                    padding: '4px 8px',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer',
-                                    fontSize: '12px',
-                                    marginRight: '4px',
-                                    background: 'transparent'
-                                  }}
+                                  onClick={() => handleSaveEdit(txn._id)}
+                                  className="table-save-btn"
                                 >
                                   ✓
                                 </button>
                                 <button 
                                   onClick={handleCancelEdit}
-                                  style={{
-                                    color: 'red',
-                                    border: 'none',
-                                    padding: '4px 8px',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer',
-                                    fontSize: '12px',
-                                    background: 'transparent'
-                                  }}
+                                  className="table-cancel-btn"
                                 >
                                   ✕
                                 </button>
@@ -549,7 +498,11 @@ const Transactions = () => {
                                   : <span>-{parseFloat(txn.amount).toFixed(2)}</span>
                                 }
                               </td>
-                              <td>{txn.date}</td>
+                              <td>{new Date(txn.date).toLocaleDateString('en-GB', { 
+                                day: 'numeric',
+                                month: 'long', 
+                                year: 'numeric' 
+                              })}</td>
                               {/* Apply different styles for transaction types */}
                               <td className={txn.type === 'Credit' ? 'credit-type' : 'debit-type'}>
                                 {txn.type}
@@ -557,34 +510,15 @@ const Transactions = () => {
                               <td>
                                 <button 
                                   onClick={() => handleEdit(txn)}
-                                  style={{
-                                    color: 'white',
-                                    border: 'none',
-                                    padding: '4px 8px',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer',
-                                    fontSize: '12px',
-                                    marginRight: '4px',
-                                    background: 'transparent'
-                                  }}
+                                  className="table-edit-btn"
                                 >
-                                  ✏️
+                                  ✎
                                 </button>
                                 <button 
-                                  onClick={() => handleDelete(txn.id)}
-                                  className="delete-btn"
-                                  style={{
-                                    color: 'white',
-                                    border: 'none',
-                                    padding: '4px 8px',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer',
-                                    fontSize: '12px',
-                                    fontWeight: '600',
-                                    background: 'transparent'
-                                  }}
+                                  onClick={() => handleDelete(txn._id)}
+                                  className="delete-btn table-delete-btn"
                                 >
-                                  🗑️
+                                  ❌
                                 </button>
                               </td>
                             </>
@@ -594,7 +528,6 @@ const Transactions = () => {
                     </tbody>
                   </table>
                 </div>
-              </div>
             )}
           </div>
         </div>

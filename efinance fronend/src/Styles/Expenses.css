@@ -1,3 +1,6 @@
+
+
+
 /* Define a custom color palette specific to the Expenses page with a purple theme */
 :root {
   --expense-primary: #7c3aed; /* Purple theme for expenses */
@@ -21,6 +24,24 @@
   right: 0 !important;
   z-index: 9999 !important;
   width: 100% !important;
+}
+
+/* Edit input styling */
+.edit-input {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  background-color: #93979e; /* Updated grey background */
+  color: white; /* White text for contrast */
+}
+
+/* Edit select styling */
+.edit-select {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  background-color: #93979e; /* Updated grey background */
+  color: white; /* White text for contrast */
 }
 
 /* Set body padding to accommodate fixed navbar and define overall theme */
@@ -170,7 +191,7 @@ body {
   border: 2px solid var(--expense-border);
   border-radius: 0.6rem;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 200;
   color: var(--expense-dark);
   outline: none;
   transition: all 0.2s;
@@ -181,10 +202,12 @@ body {
 
 /* Text input fields with higher contrast for better readability */
 .expense-form input[type="text"],
-.expense-form input[type="number"] {
-  color: #000000;
-  font-weight: 700; /* Bold text */
-  background-color: #ffffff; /* Pure white background */
+.expense-form input[type="number"],
+.transaction-form input[type="text"],
+.transaction-form input[type="number"] {
+  color: #000000 !important;
+  font-weight: 500 !important; /* Reduced font weight with !important */
+  background-color: #ffffff !important; /* Pure white background */
   border-width: 2px; /* Thicker border */
 }
 
@@ -300,6 +323,24 @@ body {
   box-shadow: 0 5px 15px rgba(124, 58, 237, 0.07);
 }
 
+/* Custom scrollbar for .expenses-list - Light/Transparent styling */
+.expenses-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.expenses-list::-webkit-scrollbar-track {
+    background: transparent; /* Transparent track */
+}
+
+.expenses-list::-webkit-scrollbar-thumb {
+    background: rgba(200, 200, 200, 0.3); /* Very light transparent grey */
+    border-radius: 4px;
+}
+
+.expenses-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(150, 150, 150, 0.5); /* Slightly more visible on hover */
+}
+
 /* Table styling within expenses list */
 .expenses-list table {
   width: 100%;
@@ -323,6 +364,14 @@ body {
   letter-spacing: 0.5px;
   text-transform: uppercase;
   font-size: 0.85rem;
+}
+
+/* Table cell content styling */
+.expenses-list td {
+  font-size: 0.3rem !important;
+  font-weight: 400 !important;
+  color: #1a365d !important;
+  padding: 0.8rem 0.5rem;
 }
 
 /* Zebra striping for table rows */
@@ -430,31 +479,7 @@ body {
   text-align: center;
 }
 
-/* Add receipt-like animation to bottom of cards */
-@keyframes receiptWave {
-  0% { background-position-x: 0; }
-  100% { background-position-x: 1000px; }
-}
-
-/* Decorative receipt-like edge at the bottom of cards */
-.page-container::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--expense-border),
-    var(--expense-border) 10px,
-    transparent 10px,
-    transparent 20px
-  );
-  border-radius: 0 0 1rem 1rem;
-  opacity: 0.5;
-  animation: receiptWave 80s linear infinite;
-}
+/* DECORATIVE RECEIPT-LIKE EDGE FORCEFULLY REMOVED */
 
 /* Responsive layout adjustments for different screen sizes */
 @media (max-width: 900px) {
@@ -475,4 +500,175 @@ body {
   .expenses-graph-container {
     max-width: 100%;
   }
+}
+
+/* Classes for inline styles replacement */
+
+/* Receipt scanner section styling */
+.receipt-scanner-section {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(37, 99, 235, 0.05);
+  border: 2px dashed #2563eb;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+/* Receipt scanner heading */
+.receipt-scanner-heading {
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Receipt scanner file input */
+.receipt-scanner-input {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #2563eb;
+  border-radius: 0.25rem;
+  width: 100%;
+  color: #6b7280; /* Light grey text color */
+  background-color: #f9fafb; /* Very light grey background */
+}
+
+/* File input placeholder and button styling */
+.receipt-scanner-input::file-selector-button {
+  background-color: #e5e7eb; /* Light grey background for button */
+  color: #3e3a3a; /* Black text for button */
+  font-weight: bold; /* Bold text */
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.receipt-scanner-input::file-selector-button:hover {
+  background-color: #d1d5db; /* Slightly darker on hover */
+}
+
+/* Scanning status message */
+.scanning-status {
+  color: #2563eb;
+  font-size: 0.9rem;
+}
+
+/* Scan success message */
+.scan-success {
+  color: #10b981;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 0.25rem;
+}
+
+/* Scan error message */
+.scan-error {
+  color: #ef4444;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 0.25rem;
+}
+
+/* Category select styling */
+.category-select {
+  font-weight: 300;
+  background-color: transparent;
+  color: black;
+  padding: 0.9rem 1.2rem;
+  box-shadow: 0 4px 10px rgba(34, 18, 137, 0.2);
+  letter-spacing: 0.03em;
+}
+
+/* Category options styling */
+.category-option {
+  background-color: #e1f1fd;
+  color: black;
+  padding: 10px;
+}
+
+/* Expense records heading */
+.expense-records-heading {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+/* Edit input styling */
+.edit-input {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  background-color: #93979e; /* Light grey background */
+  color: white; /* White text for contrast */
+}
+
+/* Edit select styling */
+.edit-select {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  background-color: #93979e; /* Updated grey background */
+  color: white; /* White text for contrast */
+}
+
+/* Save button styling */
+.save-button {
+  color: green;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 4px;
+  background: transparent;
+}
+
+/* Cancel button styling */
+.cancel-button {
+  color: red;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  background: transparent;
+}
+
+/* Edit button styling */
+.edit-button {
+  color: black;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 4px;
+  background: transparent;
+}
+
+/* Delete button styling */
+.delete-button {
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  background: transparent;
+}
+
+/* Category cell styling */
+.category-cell {
+  font-weight: 600;
+}
+
+/* Chart container styling */
+.chart-container {
+  height: 300px;
+  position: relative;
 }

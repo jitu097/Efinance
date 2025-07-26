@@ -4,12 +4,7 @@ import "./App.css";
 
 export default function App() {
   return (
-    <div
-      className="app-container"
-      style={{
-        minHeight: "100vh", // Ensure the container takes up at least the full viewport height
-      }}
-    >
+    <div className="app-container">
       {/* Navigation bar with logo and authentication actions */}
       <nav className="navbar">
         <div className="logo">
@@ -36,49 +31,49 @@ export default function App() {
         <SignedOut>
           {/* Hero section with application overview */}
           <div className="hero-section">
-             <img src="/pr.png" style={{ height: '140px', marginRight: '6rem' }} />
+             <img src="/pr.png" className="hero-logo" />
 
             <h1>Smart Financial Management</h1> {/* Main headline */}
             <p className="subtitle">Take control of your finances with our powerful tools and insights</p>
             {/* Feature cards grid - highlights key application capabilities */}
             <div className="features">
-              {/* Feature 1: Intelligent Tracking */}
+              {/* Feature 1: Transaction Management */}
               <div className="feature-card">
                 <div className="feature-icon">
-                  <i className="fas fa-chart-line"></i> {/* Line chart icon */}
+                  <i className="fas fa-exchange-alt"></i> {/* Exchange icon for transactions */}
                 </div>
-                <h3>Intelligent Tracking</h3>
-                <p>Real-time monitoring of your expenses and income with smart categorization</p>
+                <h3>Transaction Management</h3>
+                <p>Track credits, debits with CSV import</p>
                 <ul className="feature-list">
-                  <li>Automated expense tracking</li>
-                  <li>Smart categorization</li>
-                  <li>Real-time insights</li>
+                  <li>Credit & Debit tracking</li>
+                  <li>CSV bank import</li>
+                  <li>Monthly reports</li>
                 </ul>
               </div>
-              {/* Feature 2: AI-Powered Insights */}
+              {/* Feature 2: Expense Tracking */}
               <div className="feature-card">
                 <div className="feature-icon">
-                  <i className="fas fa-robot"></i> {/* Robot icon for AI */}
+                  <i className="fas fa-receipt"></i> {/* Receipt icon for expenses */}
                 </div>
-                <h3>AI-Powered Insights</h3>
-                <p>Get personalized financial recommendations and spending patterns analysis</p>
+                <h3>Smart Expense Tracking</h3>
+                <p>AI receipt scanning and categorization</p>
                 <ul className="feature-list">
-                  <li>Spending pattern analysis</li>
-                  <li>Custom recommendations</li>
-                  <li>Future predictions</li>
+                  <li>AI receipt scanning</li>
+                  <li>Category breakdown</li>
+                  <li>Visual charts</li>
                 </ul>
               </div>
-              {/* Feature 3: Bank-Grade Security */}
+              {/* Feature 3: Investment Portfolio */}
               <div className="feature-card">
                 <div className="feature-icon">
-                  <i className="fas fa-shield-alt"></i> {/* Shield icon for security */}
+                  <i className="fas fa-chart-line"></i> {/* Line chart icon for investments */}
                 </div>
-                <h3>Bank-Grade Security</h3>
-                <p>Your financial data is protected with military-grade encryption</p>
+                <h3>Investment Portfolio</h3>
+                <p>Track investments with SIP calculator</p>
                 <ul className="feature-list">
-                  <li>End-to-end encryption</li>
-                  <li>Secure authentication</li>
-                  <li>Regular security audits</li>
+                  <li>Multi-asset tracking</li>
+                  <li>SIP calculator</li>
+                  <li>Growth charts</li>
                 </ul>
               </div>
             </div>

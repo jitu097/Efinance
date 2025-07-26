@@ -99,6 +99,30 @@ body {
   border-radius: 0.5rem;
 }
 
+/* Remove scrollbar from inner table container to avoid double scrollbars */
+.table-body-container {
+  overflow: visible;
+  max-height: none;
+}
+
+/* Custom light scrollbar styling for investments list */
+.investments-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.investments-list::-webkit-scrollbar-track {
+  background: transparent; /* Transparent track */
+}
+
+.investments-list::-webkit-scrollbar-thumb {
+  background: rgba(200, 200, 200, 0.3); /* Very light transparent grey */
+  border-radius: 4px;
+}
+
+.investments-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.5); /* Slightly more visible on hover */
+}
+
 /* Table styling for consistent data display */
 .investments-list table {
   width: 100%;
@@ -165,36 +189,35 @@ body {
 /* Filter form select dropdowns */
 .investments-filter-form select {
   margin-left: 0.4rem;
-  padding: 0.3rem 0.7rem;
+  padding: 0.5rem 0.8rem;
   border-radius: 0.3rem;
   border: 1px solid #cbd5e1;
   font-size: 1rem;
   outline: none;
   transition: border 0.2s;
-}
-
-/* Focus state for select dropdowns */
-.investments-filter-form select {
-  margin-left: 0.4rem;
-  padding: 0.3rem 0.7rem;
-  border-radius: 0.3rem;
-  border: 1px solid #cbd5e1;
-  font-size: 1rem;
-  outline: none;
-  transition: border 0.2s;
-  background-color: #eef2f5; /* Changed to light blue-grey */
-  color: #333; /* Set text color to a dark grey */
-  /* Updated SVG fill color to blue (#2563eb) */
+  background-color: #eef2f5; /* Light blue-grey background */
+  color: #333; /* Dark grey text color */
+  /* Hide default dropdown arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Custom dropdown arrow icon */
   background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%232563eb%22%20d%3D%22M287%2069.9a14.4%2014.4%200%200%200-20.4%200L146.2%20190.3%2025.8%2069.9A14.4%2014.4%200%200%200%205.4%2090.3L135.8%20220.8a14.4%2014.4%200%200%200%2020.4%200L287%2090.3a14.4%2014.4%200%200%200%200-20.4z%22%2F%3E%3C%2Fsvg%3E');
   background-repeat: no-repeat;
-  background-position: right 10px top 50%;
+  background-position: right 1px top 10%;
   background-size: 12px;
   cursor: pointer;
 }
 
+/* Focus state for select dropdowns */
+.investments-filter-form select:focus {
+  border: 1.5px solid #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
 /* Graph container styling */
 .investments-graph-container {
-  background: #fff;
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
   border-radius: 0.7rem;
   box-shadow: 0 2px 8px rgba(37,99,235,0.07);
   padding: 1.2rem;
@@ -227,6 +250,11 @@ body {
   color: #111827; /* Dark text for contrast */
 }
 
+/* Calendar icon styling for date inputs */
+.investment-form input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
 
 /* Focus state for input fields */
 .investment-form input:focus,
@@ -253,7 +281,7 @@ body {
 
 /* SIP Calculator Button with gradient and animation */
 .sip-calculator-btn {
-  background: linear-gradient(45deg, #0891b2, #06b6d4);
+  background: linear-gradient(45deg, #059669, #10b981);
   color: white;
   border: none;
   border-radius: 0.5rem;
@@ -265,14 +293,14 @@ body {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  box-shadow: 0 4px 10px rgba(6, 182, 212, 0.3);
+  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3);
 }
 
 /* SIP button hover effect with lift effect */
 .sip-calculator-btn:hover {
-  background: linear-gradient(45deg, #0e7490, #0891b2);
+  background: linear-gradient(45deg, #047857, #059669);
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(6, 182, 212, 0.4);
+  box-shadow: 0 6px 15px rgba(5, 150, 105, 0.4);
 }
 
 /* SIP button active state (when clicked) */
@@ -298,6 +326,15 @@ body {
   padding: 2rem 1.5rem;
 }
 
+/* Mobile responsive adjustments for SIP calculator */
+@media (max-width: 768px) {
+  .sip-calculator {
+    margin: 0 0.5rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+}
+
 /* SIP Calculator header with navigation */
 .sip-header {
   display: flex;
@@ -306,6 +343,21 @@ body {
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #bae6fd;
+}
+
+/* Mobile responsive header */
+@media (max-width: 768px) {
+  .sip-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .sip-header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
 }
 
 /* Back button for SIP calculator */
@@ -349,6 +401,14 @@ body {
   margin-bottom: 2rem;
 }
 
+/* Mobile responsive layout for SIP form */
+@media (max-width: 768px) {
+  .sip-form-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
 /* SIP form styling with light background */
 .sip-form {
   background: #f8fafc;
@@ -379,11 +439,13 @@ body {
   border-radius: 4px;
   outline: none;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 /* Custom styling for range slider thumb */
 .input-group input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
+  appearance: none;
   width: 20px;
   height: 20px;
   background-color: #0891b2;
@@ -401,6 +463,19 @@ body {
   margin-top: 0.5rem;
   color: #0c4a6e;
   font-size: 0.85rem;
+}
+
+/* Mobile responsive range value */
+@media (max-width: 480px) {
+  .range-value {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .range-value input[type="number"] {
+    width: 120px;
+  }
 }
 
 /* Numeric input within range slider */
@@ -441,6 +516,19 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+}
+
+/* Mobile responsive layout for SIP results */
+@media (max-width: 480px) {
+  .sip-results {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  
+  /* Total value card adjustments for mobile */
+  .total-value {
+    grid-column: span 1;
+  }
 }
 
 /* Individual result cards */
@@ -504,6 +592,24 @@ body {
   background: white;
   border-radius: 0.7rem;
   box-shadow: 0 2px 10px rgba(12, 74, 110, 0.05);
+}
+
+/* Mobile responsive table container */
+@media (max-width: 768px) {
+  .breakdown-table-container {
+    margin: 0 -1rem;
+    border-radius: 0;
+  }
+  
+  .breakdown-table {
+    font-size: 0.85rem;
+  }
+  
+  .breakdown-table th,
+  .breakdown-table td {
+    padding: 0.5rem 0.3rem;
+    white-space: nowrap;
+  }
 }
 
 /* Breakdown table styling */
@@ -575,6 +681,98 @@ body {
   font-size: 1.1rem;
 }
 
+/* Table edit input styles */
+.table-edit-input {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  background-color: #93979e; /* Updated grey background */
+  color: white; /* White text for contrast */
+}
+
+/* Table edit select styles */
+.table-edit-select {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  background-color: #93979e; /* Updated grey background */
+  color: white; /* White text for contrast */
+}
+
+/* Save button for table editing */
+.table-save-btn {
+  color: green;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 4px;
+  background: transparent;
+}
+
+/* Cancel button for table editing */
+.table-cancel-btn {
+  color: red;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  background: transparent;
+}
+
+/* Table cell styles for investment name */
+.investment-name-cell {
+  font-weight: 700;
+  color: #000000;
+}
+
+/* Table cell styles for investment amount */
+.investment-amount-cell {
+  font-weight: 700;
+  color: #22c55e;
+}
+
+/* Table cell styles for investment date */
+.investment-date-cell {
+  font-weight: 700;
+  color: #000000;
+}
+
+/* Table cell styles for investment type */
+.investment-type-cell {
+  font-weight: 700;
+}
+
+/* Edit button for table rows */
+.table-edit-btn {
+  color: black;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 4px;
+  background: transparent;
+}
+
+/* Delete button for table rows */
+.table-delete-btn {
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  background: transparent;
+}
+
 /* Responsive layout adjustments for smaller screens */
 @media (max-width: 768px) {
   /* Stack investment actions vertically on small screens */
@@ -621,5 +819,45 @@ body {
   /* Switch to single column for SIP form on smaller screens */
   .sip-form-container {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Additional mobile optimizations for SIP calculator */
+@media (max-width: 480px) {
+  /* Adjust SIP form padding and spacing */
+  .sip-form {
+    padding: 1rem;
+  }
+  
+  /* Reduce input group margins */
+  .input-group {
+    margin-bottom: 1rem;
+  }
+  
+  /* Smaller button padding on mobile */
+  .calculate-btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Chart container adjustments */
+  .sip-chart-container {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Result card font size adjustments */
+  .result-card h3 {
+    font-size: 0.9rem;
+  }
+  
+  .result-card p {
+    font-size: 1.2rem;
+  }
+  
+  /* Back button full width on mobile */
+  .close-sip-btn {
+    width: 100%;
+    justify-content: center;
   }
 }

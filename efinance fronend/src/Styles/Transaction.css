@@ -1,3 +1,5 @@
+
+
 /* Global color palette for consistent theming throughout the application */
 :root {
   --primary-blue: #1a365d;    /* Dark blue for primary elements */
@@ -50,6 +52,7 @@ body {
   flex: 1;
   min-width: 300px;
   max-width: 800px;
+  background-color: whitesmoke;
   overflow-y: auto; /* Makes content scrollable if too tall */
 }
 
@@ -66,6 +69,7 @@ body {
 .transaction-form-container {
   margin-bottom: 1.5rem;
   position: relative;
+  background-color: #000000;
 }
 
 /* Transaction table container with stable positioning */
@@ -151,7 +155,7 @@ body::before {
 
 /* Card container for content sections with subtle hover animation */
 .page-container {
-  background: var(--card-bg);
+  background: #e0f2fe; /* Changed from #000000 to light blue */
   border-radius: 1.2rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
   padding: 2.2rem 1.8rem;
@@ -170,8 +174,8 @@ body::before {
 /* Primary heading within cards */
 .page-container h2 {
   font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--primary-blue);
+  font-weight: 1000 !important;
+  color:  #064db7!important;
   margin-bottom: 1.5rem;
   position: relative;
   padding-bottom: 0.8rem;
@@ -193,9 +197,9 @@ body::before {
 /* Secondary heading within cards */
 .page-container h3 {
   font-size: 1.5rem;
-  color: var(--primary-blue);
+  color: #064db7 !important;
   margin-bottom: 1.2rem;
-  font-weight: 600;
+  font-weight: 800 !important;
 }
 
 /* Transaction form with glassmorphism effect */
@@ -250,7 +254,7 @@ body::before {
 
 /* Submit button with gradient and hover effect */
 .transaction-form button {
-  background: linear-gradient(45deg, var(--primary-blue), var(--secondary-blue));
+  background: #1b57d8;
   color: white;
   border: none;
   border-radius: 0.5rem;
@@ -330,33 +334,45 @@ body::before {
   background-color: rgba(0, 0, 0, 0.05);
   border-radius: 3px;
 }
-/* Custom scrollbar for .transactions-list */
+/* Custom scrollbar for .transactions-list - Light/Transparent styling */
 .transactions-list::-webkit-scrollbar {
     width: 8px;
 }
 
 .transactions-list::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: transparent; /* Transparent track */
 }
 
 .transactions-list::-webkit-scrollbar-thumb {
-    background: #888;
+    background: rgba(200, 200, 200, 0.3); /* Very light transparent grey */
     border-radius: 4px;
 }
 
 .transactions-list::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: rgba(150, 150, 150, 0.5); /* Slightly more visible on hover */
 }
 
 /* Scrollable transaction list container */
 .transactions-list {
-  max-height: 300px; /* Fixed height for scrolling */
+  max-height: 400px; /* Fixed height for scrolling */
   overflow-y: auto;
   margin-top: 1rem;
   border: 1px solid #e2e8f0;
   border-radius: 0.8rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  /* overflow: hidden; */
+}
+
+/* Table container for consistent layout */
+.table-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scrollable table body */
+.table-body-container {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* Transaction table styling */
@@ -364,6 +380,7 @@ body::before {
   width: 100%;
   border-collapse: collapse;
   background: #f8fafc;
+  table-layout: fixed; /* Fixed table layout for consistent column widths */
 }
 
 /* Sticky header for transaction table */
@@ -378,17 +395,52 @@ body::before {
 .transactions-list th,
 .transactions-list td {
   padding: 0.7rem 0.5rem;
-  text-align: left;
+  text-align: center;
+  word-wrap: break-word; /* Handle long text */
+  overflow: hidden;
+  
+}
+
+/* General text color for all transaction record cells */
+.transactions-list td {
+  color: #1a365d; /* Dark blue for better readability */
+  font-weight: 600;
+}
+
+/* Fixed column widths for consistent layout */
+.transactions-list th:nth-child(1),
+.transactions-list td:nth-child(1) {
+  width: 35%; /* Description column */
+}
+
+.transactions-list th:nth-child(2),
+.transactions-list td:nth-child(2) {
+  width: 15%; /* Amount column */
+}
+
+.transactions-list th:nth-child(3),
+.transactions-list td:nth-child(3) {
+  width: 20%; /* Date column */
+}
+
+.transactions-list th:nth-child(4),
+.transactions-list td:nth-child(4) {
+  width: 15%; /* Type column */
+}
+
+.transactions-list th:nth-child(5),
+.transactions-list td:nth-child(5) {
+  width: 15%; /* Actions column */
 }
 
 /* Table header styling */
 .transactions-list th {
   background: #2563eb;
   color: #fff;
-  font-weight: 600;
+  font-weight: 395;
   letter-spacing: 0.5px;
-  text-transform: uppercase;
-  font-size: 0.85rem;
+  
+  font-size: 0.74rem;
 }
 
 /* Zebra striping for better readability */
@@ -411,7 +463,7 @@ body::before {
 /* Date column styling */
 .transactions-list td:nth-child(3) {
   color: #2563eb;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.01em;
 }
 
@@ -423,12 +475,14 @@ body::before {
   font-style: italic;
 }
 
-/* Credit amount styling without background */
+/* Credit amount styling with prominent green color */
 .credit-amount {
-  color: var(--success-green);
-  font-weight: 700;
+  color: #059669 !important; /* Darker green for better visibility */
+  font-weight: 800 !important;
   padding: 0.3rem 0.6rem;
   border-radius: 0.3rem;
+  background-color: rgba(5, 150, 105, 0.1); /* Light green background */
+  border: 1px solid rgba(5, 150, 105, 0.3); /* Green border */
 }
 
 /* Debit amount styling without background */
@@ -468,12 +522,18 @@ body::before {
 
 /* Chart container styling */
 .transactions-graph-container {
-  background: var(--card-bg);
+  background: #e1f1fd;
   border-radius: 1.2rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   padding: 2rem;
   position: relative;
   overflow: hidden;
+}
+
+/* Chart heading styling */
+.transactions-graph-container h3 {
+  color: #064db7 !important;
+  font-weight: 1000 !important;
 }
 
 /* Decorative accent for chart container */
@@ -508,31 +568,123 @@ body::before {
   font-style: italic;
 }
 
-/* Animation for stock market ticker effect */
-@keyframes stockMarket {
-  0% { background-position-x: 0; }
-  100% { background-position-x: 1000px; }
+/* CSV Upload Section Styles */
+.csv-upload-section {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(37, 99, 2, 0.05);
+  border: 2px dashed #2563eb;
+  border-radius: 0.5rem;
 }
 
-/* Decorative ticker-like animation at bottom of cards */
-.page-container::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 8px;
-  background: linear-gradient(90deg, 
-    var(--success-green), var(--success-green) 20px, 
-    transparent 20px, transparent 30px,
-    var(--danger-red) 30px, var(--danger-red) 45px,
-    transparent 45px, transparent 55px,
-    var(--success-green) 55px, var(--success-green) 80px,
-    transparent 80px, transparent 90px,
-    var(--danger-red) 90px, var(--danger-red) 110px,
-    transparent 110px, transparent 120px);
-  background-size: 1000px 8px;
-  border-radius: 0 0 1.2rem 1.2rem;
-  opacity: 0.3;
-  animation: stockMarket 80s linear infinite;
+/* CSV Upload Title */
+.csv-upload-title {
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  text-align: center;
 }
+
+/* CSV Upload Description */
+.csv-upload-description {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 1rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Upload Success Message */
+.upload-success-message {
+  color: #10b981;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+/* Upload Error Message */
+.upload-error-message {
+  color: #ef4444;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+/* Table Edit Input Styles */
+.table-edit-input {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  background-color: #93979e; /* Updated grey background */
+  color: white; /* White text for contrast */
+}
+
+/* Table Edit Select Styles */
+.table-edit-select {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  background-color: #93979e; /* Updated grey background */
+  color: white; /* White text for contrast */
+}
+
+/* Save Button for Table Editing */
+.table-save-btn {
+  color: green;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 4px;
+  background: transparent;
+}
+
+/* Cancel Button for Table Editing */
+.table-cancel-btn {
+  color: red;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  background: transparent;
+}
+
+/* Delete Button for Table Rows */
+.table-delete-btn {
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  background: transparent;
+}
+
+/* Edit Button for Table Rows */
+.table-edit-btn {
+  color: black;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 4px;
+  background: transparent;
+}
+
+/* Animation for stock market ticker effect - REMOVED */
+
+/* Decorative ticker-like animation at bottom of cards - REMOVED */

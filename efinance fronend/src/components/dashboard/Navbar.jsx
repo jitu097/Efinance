@@ -7,7 +7,7 @@ import './Navbar.css';
 const NavbarLogo = () => (
   <div className="navbar-logo-left">
     <NavLink to="/dashboard/overview" className="navbar-logo-link">
-      <img src="/pr.png" style={{ height: '140px', marginRight: '6rem' }} />
+      <img src="/pr.png" className="navbar-logo-image" alt="E-Finance Logo" />
     </NavLink>
   </div>
 );

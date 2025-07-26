@@ -1,9 +1,10 @@
-import { StrictMode } from 'react'
+import { StrictMode, useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from './App'
 import Dashboard from './components/dashboard/Dashboard'
+import LoadingPage from './components/LoadingPage'
 import './index.css'
 import Transactions from './pages/Transactions'
 import Expenses from './pages/Expenses'
@@ -73,15 +74,26 @@ const router = createBrowserRouter([
 ]);
 
 /**
- * Application Root Rendering
- * 
- * Renders the application inside:
- * 1. StrictMode - For highlighting potential problems in development
- * 2. ClerkProvider - For authentication services
- * 3. RouterProvider - For navigation handling
+ * App Wrapper Component with Loading State
+ * Manages the initial loading screen display
  */
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+const AppWrapper = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate app initialization time
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000); // Show loading for 3 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
+  return (
     <ClerkProvider 
       publishableKey={PUBLISHABLE_KEY}
       afterSignInUrl="/dashboard/overview" // Redirect after login
@@ -90,5 +102,18 @@ createRoot(document.getElementById('root')).render(
     >
       <RouterProvider router={router} />
     </ClerkProvider>
+  );
+};
+
+/**
+ * Application Root Rendering
+ * 
+ * Renders the application inside:
+ * 1. StrictMode - For highlighting potential problems in development
+ * 2. AppWrapper - For loading state management and authentication services
+ */
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <AppWrapper />
   </StrictMode>,
 );

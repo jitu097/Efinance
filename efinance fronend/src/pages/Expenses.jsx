@@ -129,16 +129,19 @@ const Expenses = () => {
       await deleteExpense(expenseId);
       
       // Remove expense from state after successful deletion
-      setExpenses(expenses.filter(exp => exp.id !== expenseId));
+      setExpenses(expenses.filter(exp => exp._id !== expenseId));
+      
+      // Clear any previous errors
+      setError('');
     } catch (err) {
       console.error('Error deleting expense:', err);
-      setError('Failed to delete expense');
+      setError('Failed to delete expense: ' + (err.message || 'Unknown error'));
     }
   };
 
   // Handler for starting edit mode
   const handleEdit = (expense) => {
-    setEditingId(expense.id);
+    setEditingId(expense._id);
     setForm({
       description: expense.description,
       amount: expense.amount,
@@ -319,15 +322,8 @@ const Expenses = () => {
           </div>
           <div className="content">
             {/* Receipt Scanner Section */}
-            <div className="receipt-scanner-section" style={{
-              marginBottom: '1.5rem',
-              padding: '1rem',
-              background: 'rgba(37, 99, 235, 0.05)',
-              border: '2px dashed #2563eb',
-              borderRadius: '0.5rem',
-              textAlign: 'center'
-            }}>
-              <h4 style={{ color: '#2563eb', marginBottom: '0.5rem', fontSize: '1rem' }}>
+            <div className="receipt-scanner-section">
+              <h4 className="receipt-scanner-heading">
                 📱 Scan Receipt with AI
               </h4>
               <input
@@ -335,40 +331,20 @@ const Expenses = () => {
                 accept="image/*"
                 onChange={handleReceiptScan}
                 disabled={isScanning}
-                style={{
-                  marginBottom: '0.5rem',
-                  padding: '0.5rem',
-                  border: '1px solid #2563eb',
-                  borderRadius: '0.25rem',
-                  width: '100%'
-                }}
+                className="receipt-scanner-input"
               />
               {isScanning && (
-                <div style={{ color: '#2563eb', fontSize: '0.9rem' }}>
+                <div className="scanning-status">
                   🔄 Scanning receipt with AI...
                 </div>
               )}
               {scanSuccess && (
-                <div style={{ 
-                  color: '#10b981', 
-                  fontSize: '0.9rem', 
-                  marginTop: '0.5rem',
-                  padding: '0.5rem',
-                  background: 'rgba(16, 185, 129, 0.1)',
-                  borderRadius: '0.25rem'
-                }}>
+                <div className="scan-success">
                   ✅ {scanSuccess}
                 </div>
               )}
               {scanError && (
-                <div style={{ 
-                  color: '#ef4444', 
-                  fontSize: '0.9rem', 
-                  marginTop: '0.5rem',
-                  padding: '0.5rem',
-                  background: 'rgba(239, 68, 68, 0.1)',
-                  borderRadius: '0.25rem'
-                }}>
+                <div className="scan-error">
                   ❌ {scanError}
                 </div>
               )}
@@ -409,24 +385,16 @@ const Expenses = () => {
                 value={form.category}
                 onChange={handleChange}
                 required
-                style={{
-                  fontWeight: '700',
-                  backgroundColor: 'transparent', /* Transparent background */
-                  color: 'black',
-                  border: '2px solid #7c3aed',
-                  padding: '0.9rem 1.2rem',
-                  boxShadow: '0 4px 10px rgba(124, 58, 237, 0.3)',
-                  letterSpacing: '0.03em'
-                }}
+                className="category-select"
               >
                 {/* Category options with individual colors */}
-                <option value="Food" style={{backgroundColor: '#ef4444', color: 'white', padding: '10px'}}>Food</option>
-                <option value="Transport" style={{backgroundColor: '#f97316', color: 'white', padding: '10px'}}>Transport</option>
-                <option value="Housing" style={{backgroundColor: '#eab308', color: 'white', padding: '10px'}}>Housing</option>
-                <option value="Utilities" style={{backgroundColor: '#84cc16', color: 'white', padding: '10px'}}>Utilities</option>
-                <option value="Entertainment" style={{backgroundColor: '#14b8a6', color: 'white', padding: '10px'}}>Entertainment</option>
-                <option value="Healthcare" style={{backgroundColor: '#0ea5e9', color: 'white', padding: '10px'}}>Healthcare</option>
-                <option value="Other" style={{backgroundColor: '#6366f1', color: 'white', padding: '10px'}}>Other</option>
+                <option value="Food" className="category-option">Food</option>
+                <option value="Transport" className="category-option">Transport</option>
+                <option value="Housing" className="category-option">Housing</option>
+                <option value="Utilities" className="category-option">Utilities</option>
+                <option value="Entertainment" className="category-option">Entertainment</option>
+                <option value="Healthcare" className="category-option">Healthcare</option>
+                <option value="Other" className="category-option">Other</option>
               </select>
               {/* Submit button */}
               <button type="submit">Add Expense</button>
@@ -436,7 +404,7 @@ const Expenses = () => {
         
         {/* Scrollable Expense Table */}
         <div className="page-container transactions-table-container">
-          <h3>Expense Records</h3>
+          <h3 className="expense-records-heading">Expense Records</h3>
           <div className="transactions-list">
             {filteredExpenses.length === 0 ? (
               <p className="no-transactions">No expenses yet.</p>
@@ -458,9 +426,9 @@ const Expenses = () => {
                     <tbody>
                       {/* Map through filtered expenses to create table rows */}
                       {filteredExpenses.map((exp) => (
-                        <tr key={exp.id}>
+                        <tr key={exp._id}>
                           {/* Conditional rendering for edit mode */}
-                          {editingId === exp.id ? (
+                          {editingId === exp._id ? (
                             // Edit mode - show input fields
                             <>
                               <td>
@@ -468,7 +436,7 @@ const Expenses = () => {
                                   type="text"
                                   value={form.description}
                                   onChange={(e) => setForm({ ...form, description: e.target.value })}
-                                  style={{ width: '100%', padding: '4px', border: '1px solid #ccc' }}
+                                  className="edit-input"
                                 />
                               </td>
                               <td>
@@ -476,7 +444,7 @@ const Expenses = () => {
                                   type="number"
                                   value={form.amount}
                                   onChange={(e) => setForm({ ...form, amount: e.target.value })}
-                                  style={{ width: '100%', padding: '4px', border: '1px solid #ccc' }}
+                                  className="edit-input"
                                 />
                               </td>
                               <td>
@@ -484,14 +452,14 @@ const Expenses = () => {
                                   type="date"
                                   value={form.date}
                                   onChange={(e) => setForm({ ...form, date: e.target.value })}
-                                  style={{ width: '100%', padding: '4px', border: '1px solid #ccc' }}
+                                  className="edit-input"
                                 />
                               </td>
                               <td>
                                 <select
                                   value={form.category}
                                   onChange={(e) => setForm({ ...form, category: e.target.value })}
-                                  style={{ width: '100%', padding: '4px', border: '1px solid #ccc' }}
+                                  className="edit-select"
                                 >
                                   <option value="Food">Food</option>
                                   <option value="Transport">Transport</option>
@@ -504,31 +472,14 @@ const Expenses = () => {
                               </td>
                               <td>
                                 <button 
-                                  onClick={() => handleSaveEdit(exp.id)}
-                                  style={{
-                                    color: 'green',
-                                    border: 'none',
-                                    padding: '4px 8px',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer',
-                                    fontSize: '12px',
-                                    marginRight: '4px',
-                                    background: 'transparent'
-                                  }}
+                                  onClick={() => handleSaveEdit(exp._id)}
+                                  className="save-button"
                                 >
                                   ✓
                                 </button>
                                 <button 
                                   onClick={handleCancelEdit}
-                                  style={{
-                                    color: 'red',
-                                    border: 'none',
-                                    padding: '4px 8px',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer',
-                                    fontSize: '12px',
-                                    background: 'transparent'
-                                  }}
+                                  className="cancel-button"
                                 >
                                   ✕
                                 </button>
@@ -541,44 +492,29 @@ const Expenses = () => {
                               <td className="debit-amount">
                                 <span>₹{parseFloat(exp.amount).toFixed(2)}</span>
                               </td>
-                              <td>{exp.date}</td>
-                              <td style={{ 
-                                color: categoryColors[exp.category] || '#a855f7', 
-                                fontWeight: '600'
-                              }}>
+                              <td>{new Date(exp.date).toLocaleDateString('en-GB', {
+                                day: '2-digit',
+                                month: '2-digit', 
+                                year: 'numeric'
+                              })}</td>
+                              <td 
+                                className="category-cell"
+                                style={{ color: categoryColors[exp.category] || '#a855f7' }}
+                              >
                                 {exp.category}
                               </td>
                               <td>
                                 <button 
                                   onClick={() => handleEdit(exp)}
-                                  style={{
-                                    color: 'white',
-                                    border: 'none',
-                                    padding: '4px 8px',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer',
-                                    fontSize: '12px',
-                                    marginRight: '4px',
-                                    background: 'transparent'
-                                  }}
+                                  className="edit-button"
                                 >
-                                  ✏️
+                                   ✎
                                 </button>
                                 <button 
-                                  onClick={() => handleDelete(exp.id)}
-                                  className="delete-btn"
-                                  style={{
-                                    color: 'white',
-                                    border: 'none',
-                                    padding: '4px 8px',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer',
-                                    fontSize: '12px',
-                                    fontWeight: '600',
-                                    background: 'transparent'
-                                  }}
+                                  onClick={() => handleDelete(exp._id)}
+                                  className="delete-btn delete-button"
                                 >
-                                  🗑️
+                                    ❌
                                 </button>
                               </td>
                             </>
@@ -626,7 +562,7 @@ const Expenses = () => {
         {/* Pie Chart for Expense Breakdown */}
         <div className="transactions-graph-container">
           <h3>Expense Breakdown (₹{totalExpense.toFixed(2)})</h3>
-          <div style={{ height: '300px', position: 'relative' }}>
+          <div className="chart-container">
             <Pie data={graphData} options={graphOptions} />
           </div>
         </div>

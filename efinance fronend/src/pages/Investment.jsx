@@ -389,7 +389,7 @@ const Investment = () => {
       await deleteInvestment(investmentId);
       
       // Remove investment from state after successful deletion
-      setInvestments(investments.filter(inv => inv.id !== investmentId));
+      setInvestments(investments.filter(inv => inv._id !== investmentId));
     } catch (err) {
       console.error('Error deleting investment:', err);
       setError('Failed to delete investment');
@@ -398,7 +398,7 @@ const Investment = () => {
 
   // Handler for starting edit mode
   const handleEdit = (investment) => {
-    setEditingId(investment.id);
+    setEditingId(investment._id);
     setForm({
       name: investment.name,
       amount: investment.amount,
@@ -448,11 +448,11 @@ const Investment = () => {
 
   // Define colors for different investment types
   const investmentTypeColors = {
-    'Stocks': '#22c55e',
-    'Bonds': '#ef4444',
-    'Mutual Funds': '#2563eb',
-    'Real Estate': '#f97316',
-    'Other': '#a855f7'
+    'Stocks': '#10b981',
+    'Bonds': '#f59e0b',
+    'Mutual Funds': '	#DDA0DD',
+    'Real Estate': '#ef4444',
+    'Other': '#8b5cf6'
   };
 
   // Calculate totals by investment type for the graph
@@ -478,7 +478,7 @@ const Investment = () => {
         data: [...Object.values(investmentsByType), totalInvestment],
         backgroundColor: [
           ...Object.keys(investmentsByType).map(type => investmentTypeColors[type] || '#14b8a6'),
-          '#000000' // Total bar in black
+          '#2563eb' // Total bar in blue
         ],
         borderRadius: 6,
       }
@@ -628,9 +628,9 @@ const Investment = () => {
                         <tbody>
                           {/* Map through filtered investments to render table rows */}
                           {filteredInvestments.map((inv) => (
-                            <tr key={inv.id}>
+                            <tr key={inv._id}>
                               {/* Conditional rendering for edit mode */}
-                              {editingId === inv.id ? (
+                              {editingId === inv._id ? (
                                 // Edit mode - show input fields
                                 <>
                                   <td>
@@ -638,7 +638,7 @@ const Investment = () => {
                                       type="text"
                                       value={form.name}
                                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                                      style={{ width: '100%', padding: '4px', border: '1px solid #ccc' }}
+                                      className="table-edit-input"
                                     />
                                   </td>
                                   <td>
@@ -646,7 +646,7 @@ const Investment = () => {
                                       type="number"
                                       value={form.amount}
                                       onChange={(e) => setForm({ ...form, amount: e.target.value })}
-                                      style={{ width: '100%', padding: '4px', border: '1px solid #ccc' }}
+                                      className="table-edit-input"
                                     />
                                   </td>
                                   <td>
@@ -654,14 +654,14 @@ const Investment = () => {
                                       type="date"
                                       value={form.date}
                                       onChange={(e) => setForm({ ...form, date: e.target.value })}
-                                      style={{ width: '100%', padding: '4px', border: '1px solid #ccc' }}
+                                      className="table-edit-input"
                                     />
                                   </td>
                                   <td>
                                     <select
                                       value={form.type}
                                       onChange={(e) => setForm({ ...form, type: e.target.value })}
-                                      style={{ width: '100%', padding: '4px', border: '1px solid #ccc' }}
+                                      className="table-edit-select"
                                     >
                                       <option value="Stocks">Stocks</option>
                                       <option value="Bonds">Bonds</option>
@@ -672,31 +672,14 @@ const Investment = () => {
                                   </td>
                                   <td>
                                     <button 
-                                      onClick={() => handleSaveEdit(inv.id)}
-                                      style={{
-                                        color: 'green',
-                                        border: 'none',
-                                        padding: '4px 8px',
-                                        borderRadius: '4px',
-                                        cursor: 'pointer',
-                                        fontSize: '12px',
-                                        marginRight: '4px',
-                                        background: 'transparent'
-                                      }}
+                                      onClick={() => handleSaveEdit(inv._id)}
+                                      className="table-save-btn"
                                     >
                                       ✓
                                     </button>
                                     <button 
                                       onClick={handleCancelEdit}
-                                      style={{
-                                        color: 'red',
-                                        border: 'none',
-                                        padding: '4px 8px',
-                                        borderRadius: '4px',
-                                        cursor: 'pointer',
-                                        fontSize: '12px',
-                                        background: 'transparent'
-                                      }}
+                                      className="table-cancel-btn"
                                     >
                                       ✕
                                     </button>
@@ -705,61 +688,37 @@ const Investment = () => {
                               ) : (
                                 // View mode - show regular data
                                 <>
-                                  <td style={{ 
-                                    fontWeight: '700',  /* Bold */
-                                    color: '#000000'     /* Black */
-                                  }}>
+                                  <td className="investment-name-cell">
                                     {inv.name}
                                   </td>
-                                  <td style={{ 
-                                    fontWeight: '700',  /* Bold */
-                                    color: '#22c55e'    /* Green */
-                                  }}>
+                                  <td className="investment-amount-cell">
                                     ₹{parseFloat(inv.amount).toFixed(2)}
                                   </td>
-                                  <td style={{ 
-                                    fontWeight: '700',  /* Bold */
-                                    color: '#000000'    /* Black */
-                                  }}>
-                                    {inv.date}
+                                  <td className="investment-date-cell">
+                                    {new Date(inv.date).toLocaleDateString('en-GB', { 
+                                      day: 'numeric', 
+                                      month: 'short', 
+                                      year: 'numeric' 
+                                    })}
                                   </td>
-                                  <td style={{ 
-                                    color: investmentTypeColors[inv.type] || '#14b8a6', 
-                                    fontWeight: '700'  /* Bold */
-                                  }}>
+                                  <td 
+                                    className="investment-type-cell"
+                                    style={{ color: investmentTypeColors[inv.type] || '#14b8a6' }}
+                                  >
                                     {inv.type}
                                   </td>
                                   <td>
                                     <button 
                                       onClick={() => handleEdit(inv)}
-                                      style={{
-                                        color: 'white',
-                                        border: 'none',
-                                        padding: '4px 8px',
-                                        borderRadius: '4px',
-                                        cursor: 'pointer',
-                                        fontSize: '12px',
-                                        marginRight: '4px',
-                                        background: 'transparent'
-                                      }}
+                                      className="table-edit-btn"
                                     >
-                                      ✏️
+                                       ✎
                                     </button>
                                     <button 
-                                      onClick={() => handleDelete(inv.id)}
-                                      className="delete-btn"
-                                      style={{
-                                        color: 'white',
-                                        border: 'none',
-                                        padding: '4px 8px',
-                                        borderRadius: '4px',
-                                        cursor: 'pointer',
-                                        fontSize: '12px',
-                                        fontWeight: '600',
-                                        background: 'transparent'
-                                      }}
+                                      onClick={() => handleDelete(inv._id)}
+                                      className="delete-btn table-delete-btn"
                                     >
-                                      🗑️
+                                        ❌
                                     </button>
                                   </td>
                                 </>

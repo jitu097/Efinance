@@ -180,7 +180,7 @@ const Overview = ({ name }) => {
     if (categories.length === 0 || amounts.length === 0) {
       return (
         <div className="chart-container">
-          <div style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
+          <div className="empty-chart-message">
             No expense data available for the selected period
           </div>
         </div>
@@ -237,7 +237,7 @@ const Overview = ({ name }) => {
     if (labels.length === 0 || cumulativeValues.length === 0) {
       return (
         <div className="chart-container">
-          <div style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
+          <div className="empty-chart-message">
             No investment data available for the selected period
           </div>
         </div>
@@ -308,7 +308,7 @@ const Overview = ({ name }) => {
     <>
       {/* Main dashboard container */}
       <div className="dashboard">
-        <h2>Welcome, {name} 👋</h2>
+        <h2><strong>Welcome,</strong> {name} 👋</h2>
         <div className="dashboard-grid">
           {/* Account Overview Card */}
           <div className="dashboard-card">
@@ -317,7 +317,7 @@ const Overview = ({ name }) => {
               <i className="fas fa-wallet"></i>
               <p>Total Balance</p>
               {/* Show actual total balance from transaction data */}
-              <h4 style={{ color: '#10b981' }}>
+              <h4 className="total-balance">
                 ₹{totalBalance.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </h4>
             </div>
@@ -403,7 +403,7 @@ const Overview = ({ name }) => {
             </div>
             {/* Investment Growth Line Chart */}
             <div className="chart-box investments-chart-box">
-              <h3>Investment Growth 📈</h3>
+              <h3>Investments 📈</h3>
               <InvestmentsLineChart />
             </div>
           </div>

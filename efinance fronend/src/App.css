@@ -90,9 +90,15 @@ body, html {
   margin: 0;
   background: rgba(255,255,255,0.85);
   min-height: 100vh;
-  background-image: url('/back.png');
+  background-image: url('/background.png');
   background-size: cover;
   background-position: center;
+}
+
+/* Hero logo image styling */
+.hero-logo {
+  height: 140px;
+  margin-right: 6rem;
 }
 
 .hero-section {

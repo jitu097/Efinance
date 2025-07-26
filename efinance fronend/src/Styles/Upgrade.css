@@ -201,14 +201,14 @@ body {
 }
 
 .plan-toggle button.active {
-  background: var(--upgrade-primary);
+  background:rgb(53, 118, 248);
   color: white;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  
 }
 
 /* Pricing Card */
 .pricing-card {
-  background: #73b0c3;
+  background:  #e1f1fd;
   border: 2px solid var(--upgrade-border);
   border-radius: 0.8rem;
   padding: 2rem;
@@ -245,7 +245,7 @@ body {
 /* Upgrade Button */
 .upgrade-button {
   background: linear-gradient(45deg, var(--upgrade-primary), var(--upgrade-secondary));
-  color: #7a95d0;
+  color: #eaebee;
   border: none;
   border-radius: 0.6rem;
   padding: 1rem 2rem;
@@ -253,7 +253,7 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+  
   text-transform: uppercase;
   letter-spacing: 0.5px;
   display: flex;
@@ -410,7 +410,7 @@ body {
 }
 
 .status-locked {
-  background: linear-gradient(45deg, var(--upgrade-muted), #475569);
+  background:rgb(53, 118, 248);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.6rem;
